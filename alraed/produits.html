@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ALRAED Energy | Produits</title>
+  <meta name="description" content="Catalogue produits ALRAED Energy." />
+  <link rel="icon" href="logo.jpeg" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --ink:#0b0f14; --muted:rgba(11,15,20,.66);
+      --green:#2ecc71; --green2:#18a957;
+      --border:rgba(11,15,20,.12);
+      --shadow:0 18px 55px rgba(11,15,20,.12);
+      --shadow2:0 12px 34px rgba(11,15,20,.10);
+      --radius:18px;
+    }
+    *{ font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body{ background:#fff; color:var(--ink); }
+    .container-xl{ max-width:1180px; margin:0 auto; padding:0 16px; }
+
+    /* NAV */
+    .navbar{ backdrop-filter: blur(10px); background: rgba(255,255,255,.88); border-bottom: 1px solid var(--border); }
+    .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .brand img{ width:42px; height:42px; border-radius:14px; object-fit:cover; border:1px solid var(--border); box-shadow:0 10px 28px rgba(11,15,20,.10); }
+    .brand-title{ font-weight:900; letter-spacing:-.3px; line-height:1.1; }
+    .brand-sub{ font-size:12px; color: rgba(11,15,20,.60); font-weight:700; }
+
+    /* Buttons */
+    .btn-main{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 16px; border-radius: 14px; font-weight: 900;
+      border: 1px solid var(--border); box-shadow: var(--shadow2);
+      transition: transform .15s ease, filter .15s ease; white-space: nowrap;
+      background:#fff; color:var(--ink); text-decoration:none;
+    }
+    .btn-main:hover{ transform: translateY(-1px); filter: brightness(.99); }
+    .btn-green{ color:#fff; border:none; background: linear-gradient(135deg, var(--green), var(--green2)); box-shadow: 0 14px 34px rgba(46,204,113,.22); }
+    .btn-ink{ color:#fff; background: var(--ink); border: 1px solid rgba(255,255,255,.10); box-shadow: 0 14px 34px rgba(11,15,20,.18); }
+    .btn-ghost{ background: rgba(255,255,255,.92); color:var(--ink); }
+
+    /* HERO */
+    .page-hero{
+      padding: 110px 0 18px;
+      background:
+        radial-gradient(closest-side, rgba(24,169,87,.14), transparent 70%) 10% 10%/520px 520px no-repeat,
+        radial-gradient(closest-side, rgba(11,15,20,.10), transparent 70%) 85% 25%/620px 620px no-repeat,
+        #fff;
+      border-bottom:1px solid var(--border);
+    }
+    .h-title{ font-weight: 900; letter-spacing: -.8px; font-size: clamp(28px, 4vw, 48px); margin:0; }
+    .lead{ margin-top: 10px; color: var(--muted); font-weight: 700; max-width: 90ch; }
+
+    /* Search + Filters panel */
+    .panel{
+      border:1px solid var(--border);
+      border-radius: calc(var(--radius) + 6px);
+      background:#fff;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .form-control{
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 12px 12px;
+      font-weight: 800;
+    }
+    .form-control:focus{
+      border-color: rgba(46,204,113,.55);
+      box-shadow: 0 0 0 .2rem rgba(46,204,113,.12);
+    }
+
+    /* ✅ Buttons under search */
+    .filter-row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+    .fbtn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight: 900;
+      color: rgba(11,15,20,.75);
+      box-shadow: 0 10px 25px rgba(11,15,20,.07);
+      cursor:pointer; user-select:none;
+      transition: transform .12s ease, background .12s ease, color .12s ease, border-color .12s ease;
+    }
+    .fbtn:hover{ transform: translateY(-1px); }
+    .fbtn.active{
+      color:#fff;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      border-color: transparent;
+      box-shadow: 0 14px 34px rgba(46,204,113,.22);
+    }
+
+    /* Ondulateurs sub filters */
+    #invSubWrap{ display:none; }
+    #invSubWrap.show{ display:block; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight: 900;
+      color: rgba(11,15,20,.75);
+      box-shadow: 0 10px 25px rgba(11,15,20,.07);
+      cursor:pointer; user-select:none;
+      transition: transform .12s ease, background .12s ease, color .12s ease, border-color .12s ease;
+    }
+    .chip:hover{ transform: translateY(-1px); }
+    .chip.active{
+      color:#fff;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      border-color: transparent;
+      box-shadow: 0 14px 34px rgba(46,204,113,.22);
+    }
+
+    /* Product grid */
+    .grid{ padding: 18px 0 64px; }
+    .cardx{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      height:100%;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .cardx:hover{ transform: translateY(-2px); box-shadow: 0 20px 60px rgba(11,15,20,.14); }
+    .thumb{
+      position: relative;
+      height: 230px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .thumb img{ width:100%; height:100%; object-fit: contain; background:#fff; padding: 10px; }
+    .tag{
+      position:absolute; top: 12px; left: 12px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--border);
+      font-weight: 900;
+      font-size: 12px;
+      color: rgba(11,15,20,.74);
+      box-shadow: 0 10px 25px rgba(11,15,20,.08);
+    }
+    .pad{ padding: 14px; }
+    .pname{ font-weight: 900; letter-spacing:-.2px; margin: 0 0 6px; }
+    .pdesc{ color: var(--muted); font-weight: 800; font-size: 13px; margin: 0 0 12px; min-height: 36px; }
+    .small-muted{ color: rgba(11,15,20,.55); font-weight: 800; font-size: 12px; }
+
+    /* Footer */
+    footer{ padding: 34px 0; border-top: 1px solid var(--border); background:#fff; }
+    .small-link{ color: rgba(11,15,20,.65); font-weight: 800; text-decoration:none; }
+    .small-link:hover{ color: var(--ink); }
+
+    /* WA floating */
+    .wa-float{
+      position: fixed; right: 18px; bottom: 18px; z-index: 999;
+      border-radius: 999px; padding: 12px 14px;
+      display:inline-flex; align-items:center; gap:10px;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      color:#fff; font-weight: 900;
+      box-shadow: 0 18px 50px rgba(46,204,113,.25);
+    }
+    .wa-float:hover{ filter: brightness(.98); color:#fff; }
+  </style>
+</head>
+
+<body>
+  <script>
+    const WHATS_NUMBER = "212677315076";
+    const INSTA_URL = "https://www.instagram.com/alraed_energy?igsh=MTdwNzY5eG45Ymx1Mg==";
+    const WA_GENERAL = `https://wa.me/${WHATS_NUMBER}?text=` + encodeURIComponent("Bonjour ALRAED Energy, je souhaite un devis solaire.");
+
+    function waLink(productName){
+      const text = `Bonjour ALRAED Energy,\nJe veux un devis pour :\n- ${productName}\nMerci.`;
+      return `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text)}`;
+    }
+  </script>
+
+  <nav class="navbar fixed-top">
+    <div class="container-xl py-2 d-flex justify-content-between align-items-center">
+      <a class="brand" href="index.html">
+        <img src="logo.jpeg" alt="ALRAED Energy">
+        <div class="d-flex flex-column lh-sm">
+          <span class="brand-title">ALRAED Energy</span>
+          <span class="brand-sub">Produits</span>
+        </div>
+      </a>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn-main btn-ghost" href="contact.html"><i class="fa-solid fa-phone"></i>Contact</a>
+        <a class="btn-main btn-ghost" target="_blank" href="https://www.instagram.com/alraed_energy?igsh=MTdwNzY5eG45Ymx1Mg==">
+          <i class="fa-brands fa-instagram"></i>Instagram
+        </a>
+        <a class="btn-main btn-green" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">
+          <i class="fa-brands fa-whatsapp"></i>WhatsApp
+        </a>
+        <a class="btn-main btn-ink" href="index.html"><i class="fa-solid fa-house"></i>Accueil</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container-xl">
+      <h1 class="h-title">Catalogue <span style="color:var(--green2)">Produits</span></h1>
+      <p class="lead">Recherche + boutons de tous les produits sous la recherche.</p>
+
+      <div class="panel mt-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-lg-8">
+            <input id="search" class="form-control" placeholder="Rechercher un produit..." />
+          </div>
+          <div class="col-lg-4 d-flex gap-2 flex-wrap justify-content-lg-end">
+            <a class="btn-main btn-ghost" href="#" id="clearBtn"><i class="fa-solid fa-xmark"></i>Vider</a>
+            <a class="btn-main btn-ink" href="#" id="sortBtn"><i class="fa-solid fa-arrow-down-a-z"></i> A → Z</a>
+          </div>
+        </div>
+
+        <!-- ✅ Boutons de tous les produits sous la recherche -->
+        <div class="filter-row">
+          <span class="fbtn active" data-cat="ALL"><i class="fa-solid fa-border-all"></i>Tous</span>
+          <span class="fbtn" data-cat="Panneau"><i class="fa-solid fa-solar-panel"></i>Panneaux</span>
+          <span class="fbtn" data-cat="Batterie"><i class="fa-solid fa-car-battery"></i>Batteries</span>
+          <span class="fbtn" data-cat="Ondulateur"><i class="fa-solid fa-bolt"></i>Ondulateurs</span>
+          <span class="fbtn" data-cat="Câble"><i class="fa-solid fa-plug"></i>Câbles</span>
+          <span class="fbtn" data-cat="Protection"><i class="fa-solid fa-shield-halved"></i>Protections</span>
+          <span class="fbtn" data-cat="Pompage"><i class="fa-solid fa-water"></i>Pompage</span>
+        </div>
+
+        <!-- Sous-boutons Ondulateurs -->
+        <div id="invSubWrap" class="mt-3">
+          <div class="small-muted mb-2">Types d’Ondulateurs :</div>
+          <div class="d-flex gap-2 flex-wrap">
+            <span class="chip active" data-inv="ALL"><i class="fa-solid fa-border-all"></i>Tous</span>
+            <span class="chip" data-inv="Hybride"><i class="fa-solid fa-arrows-rotate"></i>Hybride</span>
+            <span class="chip" data-inv="Off-Grid"><i class="fa-solid fa-house-circle-xmark"></i>Off-Grid</span>
+            <span class="chip" data-inv="On-Grid"><i class="fa-solid fa-plug-circle-bolt"></i>On-Grid</span>
+          </div>
+        </div>
+
+        <div class="mt-2 small-muted" id="activeInfo"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <div class="container-xl">
+      <div class="row g-3" id="grid"></div>
+      <div class="mt-3 small-muted" id="count"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container-xl d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <img src="logo.jpeg" alt="Logo" style="width:34px;height:34px;border-radius:12px;border:1px solid var(--border);object-fit:cover;">
+        <div class="fw-bold">ALRAED Energy</div>
+      </div>
+      <div class="d-flex gap-3 flex-wrap">
+        <a class="small-link" href="index.html">Accueil</a>
+        <a class="small-link" href="contact.html">Contact</a>
+        <a class="small-link" target="_blank" href="https://www.instagram.com/alraed_energy?igsh=MTdwNzY5eG45Ymx1Mg==">Instagram</a>
+        <a class="small-link" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+  </a>
+
+  <script>
+    /* ✅ Tes produits + images */
+    const PRODUCTS = [
+      { name:"Panneau Solaire", img:"panneau solaire.jpg", cat:"Panneau", invType:"", desc:"Module photovoltaïque.", keywords:"panneau solaire pv" },
+
+      { name:"Batterie Solaire", img:"batterie solaire.jpeg", cat:"Batterie", invType:"", desc:"Batterie pour stockage solaire.", keywords:"batterie stockage" },
+
+      { name:"Ondulateur Hybride", img:"ondulateur hybride.jpg", cat:"Ondulateur", invType:"Hybride", desc:"Ondulateur hybride PV + batterie.", keywords:"ondulateur hybride" },
+      { name:"Ondulateur Off-Grid", img:"ondulateur off grid.jpg", cat:"Ondulateur", invType:"Off-Grid", desc:"Ondulateur autonome (off-grid).", keywords:"ondulateur off grid" },
+      { name:"Ondulateur On-Grid", img:"ondulateur on grid.png", cat:"Ondulateur", invType:"On-Grid", desc:"Ondulateur injection réseau (on-grid).", keywords:"ondulateur on grid" },
+
+      { name:"Câble Solaire PV", img:"cable solaire.jpg", cat:"Câble", invType:"", desc:"Câble PV DC pour installation solaire.", keywords:"cable solaire pv" },
+      { name:"Câble Immergé", img:"cable immerger.jpg", cat:"Câble", invType:"", desc:"Câble pour pompe et applications submersibles.", keywords:"cable immerger pompe" },
+
+      { name:"Disjoncteur Batterie", img:"disjoncteur batterie.jpeg", cat:"Protection", invType:"", desc:"Protection DC côté batterie.", keywords:"disjoncteur batterie dc" },
+      { name:"Disjoncteur DC", img:"disjoncteur dc.jpeg", cat:"Protection", invType:"", desc:"Protection DC pour lignes PV.", keywords:"disjoncteur dc pv" },
+      { name:"Fusibles DC", img:"fusibles dc.jpeg", cat:"Protection", invType:"", desc:"Fusibles et porte-fusible PV.", keywords:"fusible dc pv" },
+      { name:"Parafoudre DC (SPD)", img:"parafoudre.jpeg", cat:"Protection", invType:"", desc:"Protection surtension pour PV.", keywords:"parafoudre spd dc" },
+
+      { name:"Variateur de Pompage", img:"variateur de pompage.jpg", cat:"Pompage", invType:"", desc:"Variateur pour pompage solaire.", keywords:"variateur pompage" }
+    ];
+
+    let activeCat = "ALL";
+    let activeInvType = "ALL";
+    let sortMode = "AZ"; // AZ or ZA
+
+    const grid = document.getElementById("grid");
+    const search = document.getElementById("search");
+    const count = document.getElementById("count");
+    const activeInfo = document.getElementById("activeInfo");
+    const invSubWrap = document.getElementById("invSubWrap");
+    const sortBtn = document.getElementById("sortBtn");
+
+    function productCard(p){
+      const badge = (p.cat === "Ondulateur") ? `Ondulateur • ${p.invType}` : p.cat;
+      return `
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="cardx">
+            <div class="thumb">
+              <span class="tag"><i class="fa-solid fa-leaf" style="color: var(--green2)"></i> ${badge}</span>
+              <img src="${p.img}" alt="${p.name}">
+            </div>
+            <div class="pad">
+              <h5 class="pname">${p.name}</h5>
+              <p class="pdesc">${p.desc}</p>
+              <div class="d-flex gap-2 flex-wrap">
+                <a class="btn-main btn-green" target="_blank" href="${waLink(p.name)}">
+                  <i class="fa-brands fa-whatsapp"></i>WhatsApp
+                </a>
+                <a class="btn-main btn-ghost" target="_blank" href="${INSTA_URL}">
+                  <i class="fa-brands fa-instagram"></i>Instagram
+                </a>
+              </div>
+              <div class="small-muted mt-2">Prix : sur demande</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function setCatActiveUI(){
+      document.querySelectorAll(".fbtn[data-cat]").forEach(b => b.classList.remove("active"));
+      const el = document.querySelector(`.fbtn[data-cat="${activeCat}"]`);
+      if(el) el.classList.add("active");
+    }
+
+    function setInvChipActive(val){
+      document.querySelectorAll(".chip[data-inv]").forEach(ch => ch.classList.remove("active"));
+      const el = document.querySelector(`.chip[data-inv="${val}"]`);
+      if(el) el.classList.add("active");
+    }
+
+    function applyAllFilters(){
+      const q = (search.value || "").toLowerCase().trim();
+      let list = PRODUCTS.slice();
+
+      if(activeCat !== "ALL") list = list.filter(p => p.cat === activeCat);
+      if(activeCat === "Ondulateur" && activeInvType !== "ALL") list = list.filter(p => p.invType === activeInvType);
+
+      if(q){
+        list = list.filter(p => (p.name + " " + p.desc + " " + p.keywords + " " + p.cat + " " + (p.invType||""))
+          .toLowerCase().includes(q));
+      }
+
+      list.sort((a,b) => a.name.localeCompare(b.name, "fr"));
+      if(sortMode === "ZA") list.reverse();
+
+      let info = (activeCat === "ALL") ? "Tous les produits" : activeCat;
+      if(activeCat === "Ondulateur") info += (activeInvType === "ALL") ? " • Tous" : ` • ${activeInvType}`;
+      info += (sortMode === "AZ") ? " • Tri A→Z" : " • Tri Z→A";
+      activeInfo.textContent = info;
+
+      grid.innerHTML = list.map(productCard).join("");
+      count.textContent = `${list.length} produit(s)`;
+    }
+
+    // Category buttons
+    document.querySelectorAll(".fbtn[data-cat]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeCat = btn.getAttribute("data-cat");
+        setCatActiveUI();
+
+        if(activeCat === "Ondulateur"){
+          invSubWrap.classList.add("show");
+          activeInvType = "ALL";
+          setInvChipActive("ALL");
+        } else {
+          invSubWrap.classList.remove("show");
+          activeInvType = "ALL";
+          setInvChipActive("ALL");
+        }
+        applyAllFilters();
+      });
+    });
+
+    // Ondulateur chips
+    document.querySelectorAll(".chip[data-inv]").forEach(chip => {
+      chip.addEventListener("click", () => {
+        if(activeCat !== "Ondulateur") return;
+        activeInvType = chip.getAttribute("data-inv");
+        setInvChipActive(activeInvType);
+        applyAllFilters();
+      });
+    });
+
+    // Search
+    search.addEventListener("input", applyAllFilters);
+
+    // Clear
+    document.getElementById("clearBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      search.value = "";
+      search.focus();
+      applyAllFilters();
+    });
+
+    // Sort toggle
+    sortBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      sortMode = (sortMode === "AZ") ? "ZA" : "AZ";
+      sortBtn.innerHTML = (sortMode === "AZ")
+        ? `<i class="fa-solid fa-arrow-down-a-z"></i> A → Z`
+        : `<i class="fa-solid fa-arrow-down-z-a"></i> Z → A`;
+      applyAllFilters();
+    });
+
+    // Init
+    setCatActiveUI();
+    applyAllFilters();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

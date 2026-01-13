@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ALRAED Energy | Solutions Solaires</title>
+  <meta name="description" content="Fournisseur de solutions solaires : Résidentiel & Industriel. Devis rapide via WhatsApp." />
+  <link rel="icon" href="logo.jpeg" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --ink:#0b0f14;
+      --muted:rgba(11,15,20,.68);
+      --green:#2ecc71;
+      --green2:#18a957;
+      --border:rgba(11,15,20,.12);
+      --shadow:0 18px 55px rgba(11,15,20,.12);
+      --shadow2:0 12px 34px rgba(11,15,20,.10);
+      --radius:20px;
+    }
+    *{ font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    body{ background:#fff; color:var(--ink); }
+    .container-xl{ max-width:1180px; }
+
+    /* NAV */
+    .navbar{
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .brand img{
+      width:42px;height:42px;border-radius:14px;object-fit:cover;
+      border:1px solid var(--border);
+      box-shadow:0 10px 28px rgba(11,15,20,.10);
+    }
+    .brand-title{ font-weight:900; letter-spacing:-.3px; line-height:1.1; }
+    .brand-sub{ font-size:12px; color:rgba(11,15,20,.60); font-weight:800; }
+
+    /* Buttons */
+    .btn-main{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding: 12px 16px; border-radius: 14px;
+      font-weight: 900;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow2);
+      background:#fff; color:var(--ink);
+      text-decoration:none;
+      transition: transform .15s ease, filter .15s ease;
+      white-space: nowrap;
+    }
+    .btn-main:hover{ transform: translateY(-1px); filter: brightness(.99); }
+    .btn-green{
+      color:#fff;
+      border:none;
+      background: linear-gradient(135deg,var(--green),var(--green2));
+      box-shadow: 0 16px 40px rgba(46,204,113,.22);
+    }
+    .btn-ink{
+      color:#fff;
+      background: var(--ink);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 16px 40px rgba(11,15,20,.18);
+    }
+    .btn-ghost{ background: rgba(255,255,255,.92); }
+
+    /* HERO */
+    .hero{
+      padding: 118px 0 46px;
+      background:
+        radial-gradient(closest-side, rgba(24,169,87,.14), transparent 70%) 10% 10%/520px 520px no-repeat,
+        radial-gradient(closest-side, rgba(11,15,20,.10), transparent 70%) 85% 25%/620px 620px no-repeat,
+        #fff;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 12px; border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.92);
+      font-weight: 900; color: rgba(11,15,20,.70);
+      box-shadow: 0 10px 25px rgba(11,15,20,.08);
+    }
+    .kicker i{ color: var(--green2); }
+    .h-title{
+      margin: 12px 0 10px;
+      font-weight: 900;
+      letter-spacing: -.9px;
+      font-size: clamp(30px, 4.2vw, 54px);
+      line-height: 1.04;
+    }
+    .lead{
+      color: var(--muted);
+      font-weight: 800;
+      max-width: 72ch;
+      margin: 0;
+    }
+
+    /* Split cards */
+    .split-wrap{ margin-top: 22px; }
+    .split-card{
+      position: relative;
+      border:1px solid var(--border);
+      border-radius: calc(var(--radius) + 6px);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      background: #fff;
+      height: 100%;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .split-card:hover{ transform: translateY(-2px); box-shadow: 0 24px 70px rgba(11,15,20,.14); }
+    .split-img{
+      height: 340px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .split-img img{
+      width:100%; height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+    }
+    .split-body{ padding: 16px; }
+    .split-title{ font-weight: 900; letter-spacing:-.3px; margin: 0 0 6px; }
+    .split-text{ color: var(--muted); font-weight: 800; font-size: 13px; margin:0 0 12px; }
+
+    .badge-top{
+      position:absolute; top: 14px; left: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      border:1px solid var(--border);
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(11,15,20,.10);
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .badge-top i{ color: var(--green2); }
+
+    /* Sections */
+    .section{ padding: 46px 0; border-top: 1px solid var(--border); background:#fff; }
+    .sec-title{ font-weight: 900; letter-spacing:-.5px; margin:0 0 8px; }
+    .sec-lead{ color: var(--muted); font-weight: 800; margin:0; max-width: 85ch; }
+
+    .feat{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      background:#fff;
+      padding: 16px;
+      height: 100%;
+    }
+    .feat-ico{
+      width:50px;height:50px;border-radius:16px;
+      display:grid;place-items:center;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(46,204,113,.18), rgba(46,204,113,.06));
+      box-shadow: 0 10px 25px rgba(46,204,113,.14);
+      color: var(--green2);
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .feat h6{ font-weight: 900; margin:0 0 6px; }
+    .feat p{ margin:0; color: var(--muted); font-weight: 800; font-size: 13px; }
+
+    /* Footer */
+    footer{ padding: 34px 0; border-top: 1px solid var(--border); background:#fff; }
+    .small-link{ color: rgba(11,15,20,.65); font-weight: 800; text-decoration:none; }
+    .small-link:hover{ color: var(--ink); }
+
+    /* Floating WhatsApp */
+    .wa-float{
+      position: fixed; right: 18px; bottom: 18px; z-index: 999;
+      border-radius: 999px; padding: 12px 14px;
+      display:inline-flex; align-items:center; gap:10px;
+      background: linear-gradient(135deg, var(--green), var(--green2));
+      color:#fff; font-weight: 900;
+      box-shadow: 0 18px 50px rgba(46,204,113,.25);
+      text-decoration:none;
+    }
+    .wa-float:hover{ filter: brightness(.98); color:#fff; }
+
+    /* Modal input styles */
+    .form-control, .form-select{
+      border-radius: 14px;
+      border:1px solid rgba(11,15,20,.12);
+      padding: 12px 12px;
+      font-weight: 800;
+    }
+    .form-control:focus, .form-select:focus{
+      border-color: rgba(46,204,113,.55);
+      box-shadow: 0 0 0 .2rem rgba(46,204,113,.12);
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const WHATS_NUMBER = "212677315076";
+    const INSTA_URL = "https://www.instagram.com/alraed_energy?igsh=MTdwNzY5eG45Ymx1Mg==";
+    const WA_GENERAL = `https://wa.me/${WHATS_NUMBER}?text=` + encodeURIComponent("Bonjour ALRAED Energy, je souhaite un devis solaire.");
+
+    function openWA(text){
+      const url = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+  <!-- NAV -->
+  <nav class="navbar fixed-top">
+    <div class="container-xl py-2 d-flex justify-content-between align-items-center">
+      <a class="brand" href="index.html">
+        <img src="logo.jpeg" alt="ALRAED Energy">
+        <div class="d-flex flex-column lh-sm">
+          <span class="brand-title">ALRAED Energy</span>
+          <span class="brand-sub">Solutions solaires</span>
+        </div>
+      </a>
+
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn-main btn-ghost" href="produits.html"><i class="fa-solid fa-box"></i>Produits</a>
+        <a class="btn-main btn-ghost" href="portfolio.html"><i class="fa-solid fa-briefcase"></i>Portfolio</a>
+        <a class="btn-main btn-ghost" href="contact.html"><i class="fa-solid fa-phone"></i>Contact</a>
+        <a class="btn-main btn-ghost" target="_blank" href="https://www.instagram.com/alraed_energy?igsh=MTdwNzY5eG45Ymx1Mg==">
+          <i class="fa-brands fa-instagram"></i>Instagram
+        </a>
+        <a class="btn-main btn-green" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">
+          <i class="fa-brands fa-whatsapp"></i>WhatsApp
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container-xl">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <div class="kicker">
+            <i class="fa-solid fa-leaf"></i> Énergie solaire • Économie • Fiabilité
+          </div>
+          <h1 class="h-title">
+            Solutions solaires
+            <span style="color:var(--green2)">Résidentiel</span> & <span style="color:var(--ink)">Industriel</span>
+          </h1>
+          <p class="lead">
+            Résidentiel : questions rapides + message WhatsApp prêt. Industriel : ville + activité + demande facture 6 mois.
+          </p>
+
+          <div class="d-flex gap-2 flex-wrap mt-3">
+            <!-- Residentiel wizard -->
+            <a class="btn-main btn-green" href="#" id="btnResidentiel">
+              <i class="fa-solid fa-house"></i>Résidentiel
+            </a>
+
+            <!-- ✅ Industriel wizard -->
+            <a class="btn-main btn-ink" href="#" id="btnIndustriel">
+              <i class="fa-solid fa-file-invoice"></i>Industriel (Facture 6 mois)
+            </a>
+
+            <a class="btn-main btn-ghost" href="produits.html">
+              <i class="fa-solid fa-box"></i>Voir les produits
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 split-wrap">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="split-card">
+                <div class="badge-top"><i class="fa-solid fa-house"></i> Résidentiel</div>
+                <div class="split-img">
+                  <img src="quartier.png" alt="Résidentiel">
+                </div>
+                <div class="split-body">
+                  <div class="split-title">Quartiers • Villas • Appartements</div>
+                  <div class="split-text">Réduction de facture, autonomie, batterie si besoin.</div>
+                  <a class="btn-main btn-green w-100" href="#" onclick="document.getElementById('btnResidentiel').click(); return false;">
+                    <i class="fa-solid fa-play"></i>Démarrer
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="split-card">
+                <div class="badge-top"><i class="fa-solid fa-industry"></i> Industriel</div>
+                <div class="split-img">
+                  <img src="usine.png" alt="Industriel">
+                </div>
+                <div class="split-body">
+                  <div class="split-title">Usines • Entrepôts • Projets</div>
+                  <div class="split-text">Ville + activité + envoi facture 6 mois pour étude.</div>
+                  <a class="btn-main btn-ink w-100" href="#" id="btnIndustrielCard">
+                    <i class="fa-solid fa-file-invoice"></i>Envoyer facture (6 mois)
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION -->
+  <section class="section">
+    <div class="container-xl">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+        <div>
+          <h2 class="sec-title">Pourquoi ALRAED Energy</h2>
+          <p class="sec-lead">Solutions adaptées, composants fiables et accompagnement jusqu’à l’installation.</p>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <a class="btn-main btn-ghost" href="contact.html"><i class="fa-solid fa-phone"></i>Nous contacter</a>
+          <a class="btn-main btn-green" href="produits.html"><i class="fa-solid fa-box"></i>Catalogue</a>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="feat">
+            <div class="feat-ico"><i class="fa-solid fa-solar-panel"></i></div>
+            <h6>Composants solaires</h6>
+            <p>Panneaux, batteries, câbles, protections et variateurs de pompage.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feat">
+            <div class="feat-ico"><i class="fa-solid fa-bolt"></i></div>
+            <h6>Ondulateurs</h6>
+            <p>Hybride, Off-Grid et On-Grid selon votre besoin et votre budget.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feat">
+            <div class="feat-ico"><i class="fa-brands fa-whatsapp"></i></div>
+            <h6>Devis rapide</h6>
+            <p>Contact direct via WhatsApp avec un message prêt et clair.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: linear-gradient(180deg, rgba(46,204,113,.08), transparent);">
+    <div class="container-xl">
+      <div class="row g-3 align-items-center">
+        <div class="col-lg-7">
+          <h2 class="sec-title">Demandez votre devis en 1 minute</h2>
+          <p class="sec-lead">Résidentiel : 2 questions. Industriel : ville + activité + facture 6 mois.</p>
+        </div>
+        <div class="col-lg-5 d-flex gap-2 flex-wrap justify-content-lg-end">
+          <a class="btn-main btn-green" href="#" onclick="document.getElementById('btnResidentiel').click(); return false;">
+            <i class="fa-solid fa-house"></i>Résidentiel
+          </a>
+          <a class="btn-main btn-ink" href="#" id="btnIndustrielCTA">
+            <i class="fa-solid fa-file-invoice"></i>Industriel
+          </a>
+          <a class="btn-main btn-ghost" href="contact.html"><i class="fa-solid fa-phone"></i>Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container-xl d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <img src="logo.jpeg" alt="Logo" style="width:34px;height:34px;border-radius:12px;border:1px solid var(--border);object-fit:cover;">
+        <div class="fw-bold">ALRAED Energy</div>
+      </div>
+      <div class="d-flex gap-3 flex-wrap">
+        <a class="small-link" href="produits.html">Produits</a>
+        <a class="small-link" href="portfolio.html">Portfolio</a>
+        <a class="small-link" href="contact.html">Contact</a>
+        <a class="small-link" target="_blank" href="https://www.instagram.com/alraed_energy?igsh=MTdwNzY5eG45Ymx1Mg==">Instagram</a>
+        <a class="small-link" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+  </a>
+
+  <!-- ================== RESIDENTIEL WIZARD (MODAL) ================== -->
+  <div class="modal fade" id="residentielModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content" style="border-radius:22px; overflow:hidden; border:1px solid rgba(11,15,20,.12);">
+        <div class="modal-header" style="background: linear-gradient(135deg, rgba(46,204,113,.18), rgba(46,204,113,.06)); border-bottom:1px solid rgba(11,15,20,.12);">
+          <div class="d-flex align-items-center gap-3">
+            <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#fff;border:1px solid rgba(11,15,20,.12);box-shadow:0 12px 34px rgba(11,15,20,.10);">
+              <i class="fa-solid fa-leaf" style="color:#18a957; font-size:18px;"></i>
+            </div>
+            <div>
+              <div style="font-weight:900; letter-spacing:-.3px; font-size:18px;">Résidentiel — Simulation rapide</div>
+              <div style="color:rgba(11,15,20,.65); font-weight:800; font-size:12.5px;">3 étapes, puis message WhatsApp</div>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="padding:18px;">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="flex-grow-1" style="height:10px;border-radius:999px;background:rgba(11,15,20,.08);overflow:hidden;">
+              <div id="wizBar" style="height:100%;width:33%;border-radius:999px;background:linear-gradient(135deg,#2ecc71,#18a957);"></div>
+            </div>
+            <div id="wizStepText" style="min-width:80px;text-align:right;font-weight:900;color:rgba(11,15,20,.65);">1/3</div>
+          </div>
+
+          <!-- Step 1 -->
+          <div id="step1" class="wiz-step">
+            <div style="font-weight:900;font-size:18px;letter-spacing:-.3px;margin-bottom:8px;">
+              Combien tu payes la facture d’électricité ?
+            </div>
+            <div style="color:rgba(11,15,20,.66);font-weight:800;margin-bottom:14px;">
+              Choisis une tranche approximative.
+            </div>
+
+            <div class="row g-2">
+              <div class="col-md-4">
+                <button class="wopt btn w-100" data-bill="500–1000 DH"
+                  style="border-radius:16px;border:1px solid rgba(11,15,20,.12);padding:14px;font-weight:900;background:#fff;box-shadow:0 12px 34px rgba(11,15,20,.08);">
+                  500 → 1000
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button class="wopt btn w-100" data-bill="1500–2500 DH"
+                  style="border-radius:16px;border:1px solid rgba(11,15,20,.12);padding:14px;font-weight:900;background:#fff;box-shadow:0 12px 34px rgba(11,15,20,.08);">
+                  1500 → 2500
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button class="wopt btn w-100" data-bill="3000–5000 DH"
+                  style="border-radius:16px;border:1px solid rgba(11,15,20,.12);padding:14px;font-weight:900;background:#fff;box-shadow:0 12px 34px rgba(11,15,20,.08);">
+                  3000 → 5000
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="step2" class="wiz-step" style="display:none;">
+            <div style="font-weight:900;font-size:18px;letter-spacing:-.3px;margin-bottom:8px;">
+              Combien souhaitez-vous économiser ?
+            </div>
+            <div style="color:rgba(11,15,20,.66);font-weight:800;margin-bottom:14px;">
+              Choisis ton objectif.
+            </div>
+
+            <div class="row g-2">
+              <div class="col-md-4">
+                <button class="wopt2 btn w-100" data-save="50%"
+                  style="border-radius:16px;border:1px solid rgba(11,15,20,.12);padding:14px;font-weight:900;background:#fff;box-shadow:0 12px 34px rgba(11,15,20,.08);">
+                  50%
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button class="wopt2 btn w-100" data-save="75%"
+                  style="border-radius:16px;border:1px solid rgba(11,15,20,.12);padding:14px;font-weight:900;background:#fff;box-shadow:0 12px 34px rgba(11,15,20,.08);">
+                  75%
+                </button>
+              </div>
+              <div class="col-md-4">
+                <button class="wopt2 btn w-100" data-save="90%"
+                  style="border-radius:16px;border:1px solid rgba(11,15,20,.12);padding:14px;font-weight:900;background:#fff;box-shadow:0 12px 34px rgba(11,15,20,.08);">
+                  90%
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2 flex-wrap">
+              <button id="backTo1" class="btn-main btn-ghost" type="button">
+                <i class="fa-solid fa-arrow-left"></i>Retour
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div id="step3" class="wiz-step" style="display:none;">
+            <div style="font-weight:900;font-size:18px;letter-spacing:-.3px;margin-bottom:8px;">
+              Ton message WhatsApp est prêt
+            </div>
+            <div style="color:rgba(11,15,20,.66);font-weight:800;margin-bottom:14px;">
+              Clique pour envoyer à ALRAED Energy.
+            </div>
+
+            <div class="p-3" style="border:1px solid rgba(11,15,20,.12); border-radius:18px; background: rgba(24,169,87,.06);">
+              <div style="font-weight:900; margin-bottom:6px;">Résumé :</div>
+              <div style="font-weight:800; color:rgba(11,15,20,.72);" id="summaryText">—</div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2 flex-wrap">
+              <a id="waSendBtn" class="btn-main btn-green" target="_blank" href="#">
+                <i class="fa-brands fa-whatsapp"></i>Envoyer WhatsApp
+              </a>
+              <button id="backTo2" class="btn-main btn-ghost" type="button">
+                <i class="fa-solid fa-arrow-left"></i>Retour
+              </button>
+              <button id="restartWiz" class="btn-main btn-ink" type="button">
+                <i class="fa-solid fa-rotate"></i>Recommencer
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================== INDUSTRIEL WIZARD (MODAL) ================== -->
+  <div class="modal fade" id="industrielModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content" style="border-radius:22px; overflow:hidden; border:1px solid rgba(11,15,20,.12);">
+        <div class="modal-header" style="background: rgba(11,15,20,.95); border-bottom:1px solid rgba(255,255,255,.10);">
+          <div class="d-flex align-items-center gap-3">
+            <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#fff;border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 34px rgba(0,0,0,.25);">
+              <i class="fa-solid fa-file-invoice" style="color:#0b0f14; font-size:18px;"></i>
+            </div>
+            <div>
+              <div style="font-weight:900; letter-spacing:-.3px; font-size:18px; color:#fff;">Industriel — Demande de devis</div>
+              <div style="color:rgba(255,255,255,.72); font-weight:800; font-size:12.5px;">Ville + activité + envoi facture 6 mois</div>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body" style="padding:18px;">
+          <!-- Progress -->
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="flex-grow-1" style="height:10px;border-radius:999px;background:rgba(11,15,20,.08);overflow:hidden;">
+              <div id="indBar" style="height:100%;width:50%;border-radius:999px;background:linear-gradient(135deg,#2ecc71,#18a957);"></div>
+            </div>
+            <div id="indStepText" style="min-width:80px;text-align:right;font-weight:900;color:rgba(11,15,20,.65);">1/2</div>
+          </div>
+
+          <!-- Step 1 -->
+          <div id="indStep1">
+            <div style="font-weight:900;font-size:18px;letter-spacing:-.3px;margin-bottom:8px;">
+              Informations du projet
+            </div>
+            <div style="color:rgba(11,15,20,.66);font-weight:800;margin-bottom:14px;">
+              Remplis ces champs pour préparer le message WhatsApp.
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="mb-1">Ville</label>
+                <input id="indVille" class="form-control" type="text" placeholder="Ex: Casablanca, Rabat...">
+              </div>
+              <div class="col-md-6">
+                <label class="mb-1">Type d’activité</label>
+                <input id="indActivite" class="form-control" type="text" placeholder="Ex: usine, entrepôt, hôtel...">
+              </div>
+
+              <div class="col-12">
+                <label class="mb-1">Remarque (optionnel)</label>
+                <textarea id="indNote" class="form-control" rows="3" placeholder="Ex: puissance souhaitée, surface, etc."></textarea>
+              </div>
+
+              <div class="col-12 d-flex gap-2 flex-wrap">
+                <button id="indNext" class="btn-main btn-ink" type="button">
+                  <i class="fa-solid fa-arrow-right"></i>Suivant
+                </button>
+                <a class="btn-main btn-ghost" target="_blank" href="#" onclick="window.open(WA_GENERAL,'_blank'); return false;">
+                  <i class="fa-brands fa-whatsapp"></i>WhatsApp direct
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="indStep2" style="display:none;">
+            <div style="font-weight:900;font-size:18px;letter-spacing:-.3px;margin-bottom:8px;">
+              Envoyer la facture (6 mois)
+            </div>
+            <div style="color:rgba(11,15,20,.66);font-weight:800;margin-bottom:14px;">
+              Après ouverture WhatsApp, le client joint les factures (PDF ou photos) dans la conversation.
+            </div>
+
+            <div class="p-3" style="border:1px solid rgba(11,15,20,.12); border-radius:18px; background: rgba(11,15,20,.03);">
+              <div style="font-weight:900; margin-bottom:6px;">Résumé :</div>
+              <div style="font-weight:800; color:rgba(11,15,20,.72);" id="indSummary">—</div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2 flex-wrap">
+              <a id="indWaBtn" class="btn-main btn-green" target="_blank" href="#">
+                <i class="fa-brands fa-whatsapp"></i>Ouvrir WhatsApp & Envoyer
+              </a>
+              <button id="indBack" class="btn-main btn-ghost" type="button">
+                <i class="fa-solid fa-arrow-left"></i>Retour
+              </button>
+              <button id="indRestart" class="btn-main btn-ink" type="button">
+                <i class="fa-solid fa-rotate"></i>Recommencer
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ===================== RESIDENTIEL WIZARD =====================
+    let chosenBill = "";
+    let chosenSave = "";
+
+    const btnResidentiel = document.getElementById("btnResidentiel");
+    const residentielModalEl = document.getElementById("residentielModal");
+    const residentielModal = new bootstrap.Modal(residentielModalEl);
+
+    const step1 = document.getElementById("step1");
+    const step2 = document.getElementById("step2");
+    const step3 = document.getElementById("step3");
+
+    const wizBar = document.getElementById("wizBar");
+    const wizStepText = document.getElementById("wizStepText");
+
+    const summaryText = document.getElementById("summaryText");
+    const waSendBtn = document.getElementById("waSendBtn");
+
+    function setResStep(n){
+      step1.style.display = (n===1) ? "" : "none";
+      step2.style.display = (n===2) ? "" : "none";
+      step3.style.display = (n===3) ? "" : "none";
+
+      wizStepText.textContent = `${n}/3`;
+      wizBar.style.width = (n===1) ? "33%" : (n===2) ? "66%" : "100%";
+    }
+
+    function buildResWhatsAppMessage(){
+      const billMid = chosenBill.includes("500") ? 750 : chosenBill.includes("1500") ? 2000 : 4000;
+      const savePct = chosenSave === "50%" ? 0.5 : chosenSave === "75%" ? 0.75 : 0.9;
+      const estSave = Math.round(billMid * savePct);
+
+      return (
+`Bonjour ALRAED Energy,
+Je suis intéressé par une solution solaire Résidentiel.
+
+- Facture d’électricité: ${chosenBill}
+- Objectif économie: ${chosenSave}
+- Économie estimée: ~${estSave} DH / mois (approx.)
+
+Merci de me proposer une solution adaptée.`
+      );
+    }
+
+    function updateResFinal(){
+      const msg = buildResWhatsAppMessage();
+      summaryText.textContent = `Facture: ${chosenBill} | Économie: ${chosenSave}`;
+      waSendBtn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(msg)}`;
+    }
+
+    btnResidentiel?.addEventListener("click", (e) => {
+      e.preventDefault();
+      chosenBill = "";
+      chosenSave = "";
+      setResStep(1);
+      residentielModal.show();
+    });
+
+    document.querySelectorAll(".wopt").forEach(btn => {
+      btn.addEventListener("click", () => {
+        chosenBill = btn.getAttribute("data-bill") || "";
+        setResStep(2);
+      });
+    });
+
+    document.querySelectorAll(".wopt2").forEach(btn => {
+      btn.addEventListener("click", () => {
+        chosenSave = btn.getAttribute("data-save") || "";
+        updateResFinal();
+        setResStep(3);
+      });
+    });
+
+    document.getElementById("backTo1")?.addEventListener("click", () => setResStep(1));
+    document.getElementById("backTo2")?.addEventListener("click", () => setResStep(2));
+
+    document.getElementById("restartWiz")?.addEventListener("click", () => {
+      chosenBill = "";
+      chosenSave = "";
+      setResStep(1);
+    });
+
+    residentielModalEl.addEventListener("hidden.bs.modal", () => {
+      chosenBill = "";
+      chosenSave = "";
+      setResStep(1);
+    });
+
+    // ===================== INDUSTRIEL WIZARD =====================
+    const btnIndustriel = document.getElementById("btnIndustriel");
+    const btnIndustrielCard = document.getElementById("btnIndustrielCard");
+    const btnIndustrielCTA = document.getElementById("btnIndustrielCTA");
+
+    const industrielModalEl = document.getElementById("industrielModal");
+    const industrielModal = new bootstrap.Modal(industrielModalEl);
+
+    const indStep1 = document.getElementById("indStep1");
+    const indStep2 = document.getElementById("indStep2");
+    const indBar = document.getElementById("indBar");
+    const indStepText = document.getElementById("indStepText");
+
+    const indVille = document.getElementById("indVille");
+    const indActivite = document.getElementById("indActivite");
+    const indNote = document.getElementById("indNote");
+
+    const indNext = document.getElementById("indNext");
+    const indBack = document.getElementById("indBack");
+    const indRestart = document.getElementById("indRestart");
+
+    const indSummary = document.getElementById("indSummary");
+    const indWaBtn = document.getElementById("indWaBtn");
+
+    function setIndStep(n){
+      indStep1.style.display = (n===1) ? "" : "none";
+      indStep2.style.display = (n===2) ? "" : "none";
+      indStepText.textContent = `${n}/2`;
+      indBar.style.width = (n===1) ? "50%" : "100%";
+    }
+
+    function buildIndWhatsAppMessage(){
+      const ville = (indVille.value || "").trim() || "-";
+      const act = (indActivite.value || "").trim() || "-";
+      const note = (indNote.value || "").trim();
+
+      const base =
+`Bonjour ALRAED Energy,
+Je suis intéressé par une solution solaire Industriel.
+
+- Ville: ${ville}
+- Type d’activité: ${act}${note ? `\n- Remarque: ${note}` : ""}
+
+Pour étude et devis, je vais envoyer la facture d’électricité des 6 derniers mois (PDF ou photos) dans cette conversation.
+Merci.`;
+
+      return base;
+    }
+
+    function updateIndFinal(){
+      const ville = (indVille.value || "").trim() || "—";
+      const act = (indActivite.value || "").trim() || "—";
+      indSummary.textContent = `Ville: ${ville} | Activité: ${act}`;
+      indWaBtn.href = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(buildIndWhatsAppMessage())}`;
+    }
+
+    function openIndModal(e){
+      if(e) e.preventDefault();
+      setIndStep(1);
+      industrielModal.show();
+      setTimeout(() => indVille?.focus(), 200);
+    }
+
+    btnIndustriel?.addEventListener("click", openIndModal);
+    btnIndustrielCard?.addEventListener("click", openIndModal);
+    btnIndustrielCTA?.addEventListener("click", openIndModal);
+
+    indNext?.addEventListener("click", () => {
+      // Minimal validation (not blocking, but better UX)
+      updateIndFinal();
+      setIndStep(2);
+    });
+
+    indBack?.addEventListener("click", () => setIndStep(1));
+
+    indRestart?.addEventListener("click", () => {
+      indVille.value = "";
+      indActivite.value = "";
+      indNote.value = "";
+      setIndStep(1);
+      indVille.focus();
+    });
+
+    industrielModalEl.addEventListener("hidden.bs.modal", () => {
+      setIndStep(1);
+      // keep fields or clear? we keep them for convenience
+    });
+
+    // Init steps
+    setResStep(1);
+    setIndStep(1);
+  </script>
+</body>
+</html>
+
